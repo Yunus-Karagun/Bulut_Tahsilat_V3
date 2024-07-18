@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
 
-Bulut_All=pd.read_excel(r'D:\BulutTahsilat\2024-05\2024-05-BT.xlsx')
+Config=pd.read_excel(r"D:\BulutTahsilat\Config.xlsx", sheet_name="Config")
+
+Bulut_All=pd.read_excel(Config.iloc[4,1])
 Banka_Conf=pd.read_excel(r"D:\BulutTahsilat\Config.xlsx", sheet_name="Banka")
 Bulut_All["Tarih"]=Bulut_All["Tarih"].dt.date
 
@@ -91,7 +93,7 @@ V3_Other['Type'] = V3_Other['Type'].replace({'Banka1': 'Banka', 'Banka2': 'Banka
 
 V3_Other.reset_index(inplace=True, drop=True)
 
-IS_Pos=pd.read_excel(r'D:\BulutTahsilat\2024-05\2024-05-ISPOS.xlsx')
+IS_Pos=pd.read_excel(Config.iloc[5,1])
 IS_Pos["Tarih"]=IS_Pos["Valör Tarihi"].dt.date
 
 IS_Pos.sort_values(by=['Valör Tarihi'], inplace=True)
@@ -164,4 +166,4 @@ V3_Format["FTAtt03"]= ""
 V3_Format["FTAtt04"]= ""
 V3_Format["FTAtt05"]= ""
 
-V3_Format.to_excel(r'D:\BulutTahsilat\2024-05\2024_05_POS_V3.xlsx', index=False)
+V3_Format.to_excel(Config.iloc[6,1], index=False)
