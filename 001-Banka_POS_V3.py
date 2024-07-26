@@ -66,8 +66,6 @@ Bulut_POS['KOD'] = Bulut_POS.apply(determine_kod, axis=1)
 
 Bulut_POS['KOD1']= Bulut_POS['KOD'].str.split('-').str[1]
 
-# Bulut_POS_Kodlu=Bulut_POS[["Hareket Tipi", "İşlem Kodu", "Banka", "Tutar", "Tarih", "Firma IBAN", "KOD", "KOD1"]].reset_index(drop=True)
-
 POS_Toplam=Bulut_POS.groupby(['Tarih', 'Banka', "Firma IBAN", 'KOD',"KOD1"])['Tutar'].sum().reset_index()
 
 
