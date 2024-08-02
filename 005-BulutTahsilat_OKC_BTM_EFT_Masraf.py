@@ -13,9 +13,9 @@ def assign_code(row):
         return 'TB_EFTM'
     elif row['Banka'] == 'TEB' and row['Fonksiyon Kodu 1'] == 1070 and row['İşlem Tipi'] == 'MASRAF':
         return 'TB_POSM'
-    elif row['Banka'] == 'Akbank' and row['Fonksiyon Kodu 1'] == 'MSC' and row['Fonksiyon Kodu 2'] == '00F8':
+    elif row['Banka'] == 'AKBANK' and row['Fonksiyon Kodu 1'] == 'MSC' and row['Fonksiyon Kodu 2'] == '00F8':
         return 'AK_EFTM'
-    elif row['Banka'] == 'Akbank' and row['Fonksiyon Kodu 1'] == 'MSC' and row['Fonksiyon Kodu 2'] == '00UC':
+    elif row['Banka'] == 'AKBANK' and row['Fonksiyon Kodu 1'] == 'MSC' and row['Fonksiyon Kodu 2'] == '00UC':
         return 'AK_POSM'
     elif row['Banka'] == 'HALKBANK' and row['Fonksiyon Kodu 1'] == 'COC' and 'Aidat' in row['Açıklama']:
         return 'HB_POSM'

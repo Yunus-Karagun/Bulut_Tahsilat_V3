@@ -15,7 +15,8 @@ Bulut_All["Tarih"]=Bulut_All["Tarih"].dt.date
 Bulut_Filtered = Bulut_All[
     (Bulut_All['Vergi No'].isin(VKN_Conf['Vergi No'])) |
     ((Bulut_All['Banka'] == 'TEB') & Bulut_All['Açıklama'].str.contains("nolu fat") & 
-     Bulut_All['Açıklama'].str.contains("L J MAĞAZACILIK SAN VE TİİV AŞ")&
+     Bulut_All['Açıklama'].str.contains("L J MAĞAZACILIK SAN VE TİİV AŞ"))|
+    ((Bulut_All['Banka'] == 'QNB FİNANSBANK') & Bulut_All['Açıklama'].str.contains("DBS Fatura Tahsilatı - OTOMATİK. Bayi Referans")&
      (Bulut_All['İşlem Tipi'] == 'BANKA HAREKETİ') 
    )].copy().reset_index(drop=True)
 
@@ -24,6 +25,14 @@ Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'TEB') & Bulut_Filtered['Açıkl
      Bulut_Filtered['Açıklama'].str.contains("L J MAĞAZACILIK SAN VE TİİV AŞ")&
      (Bulut_Filtered['İşlem Tipi'] == 'BANKA HAREKETİ') 
    ), 'Vergi No'] = '6080051647'
+
+Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'QNB FİNANSBANK') & Bulut_Filtered['Açıklama'].str.contains("DBS Fatura Tahsilatı - OTOMATİK. Bayi Referans: 120.02.01.01.789") & 
+     (Bulut_Filtered['İşlem Tipi'] == 'BANKA HAREKETİ') 
+   ), 'Vergi No'] = '2110061707'
+
+Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'QNB FİNANSBANK') & Bulut_Filtered['Açıklama'].str.contains("DBS Fatura Tahsilatı - OTOMATİK. Bayi Referans: 214334") & 
+     (Bulut_Filtered['İşlem Tipi'] == 'BANKA HAREKETİ') 
+   ), 'Vergi No'] = '8500323251'
 
 Bank_Code=Bulut_Filtered.merge(Banka_Conf[["Firma IBAN","BANKA HESAP KODU", "Muhasebe Kodu"]], on="Firma IBAN", how="left")
 
@@ -62,3 +71,4 @@ V3_Format['FTAtt04'] = ""
 V3_Format['FTAtt05'] = ""
 
 V3_Format.to_excel(Config.iloc[13,1], index=False)
+
