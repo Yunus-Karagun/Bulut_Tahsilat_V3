@@ -39,7 +39,8 @@ def assign_code(row):
         return 'VB_EFTM'
     elif row['Banka'] == 'ZİRAAT KATILIM' and row['Fonksiyon Kodu 1'] in ["MASTT", "KTMGC"] and row['İşlem Tipi'] == 'MASRAF':
         return 'ZK_BTMM'
-   
+    elif row['Banka'] == 'ZİRAAT BANKASI' and row['Fonksiyon Kodu 1'] == "XXX" and row['Fonksiyon Kodu 2'] == 'UYESUCRT' :
+        return 'ZB_POSM'
     else:
         return ''
 

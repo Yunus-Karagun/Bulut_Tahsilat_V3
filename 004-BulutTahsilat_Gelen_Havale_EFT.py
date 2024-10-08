@@ -14,16 +14,14 @@ Bulut_All["Tarih"]=Bulut_All["Tarih"].dt.date
 
 Bulut_Filtered = Bulut_All[
     (Bulut_All['Vergi No'].isin(VKN_Conf['Vergi No'])) |
-    ((Bulut_All['Banka'] == 'TEB') & Bulut_All['Açıklama'].str.contains("nolu fat") & 
-     Bulut_All['Açıklama'].str.contains("L J MAĞAZACILIK SAN VE TİİV AŞ"))|
+    ((Bulut_All['Banka'] == 'TEB') & (Bulut_All['Fonksiyon Kodu 1'] == 1207)  & 
+     (Bulut_All['Hareket Tipi'] == 'BORÇ'))|
     ((Bulut_All['Banka'] == 'QNB FİNANSBANK') & Bulut_All['Açıklama'].str.contains("DBS Fatura Tahsilatı - OTOMATİK. Bayi Referans")&
      (Bulut_All['İşlem Tipi'] == 'BANKA HAREKETİ') 
    )].copy().reset_index(drop=True)
 
-
-Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'TEB') & Bulut_Filtered['Açıklama'].str.contains("nolu fat") & 
-     Bulut_Filtered['Açıklama'].str.contains("L J MAĞAZACILIK SAN VE TİİV AŞ")&
-     (Bulut_Filtered['İşlem Tipi'] == 'BANKA HAREKETİ') 
+Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'TEB') & (Bulut_Filtered['Fonksiyon Kodu 1'] == 1207) & 
+         (Bulut_Filtered['İşlem Tipi'] == 'BANKA HAREKETİ') & (Bulut_Filtered['Hareket Tipi'] == 'BORÇ')
    ), 'Vergi No'] = '6080051647'
 
 Bulut_Filtered.loc[((Bulut_Filtered['Banka'] == 'QNB FİNANSBANK') & Bulut_Filtered['Açıklama'].str.contains("DBS Fatura Tahsilatı - OTOMATİK. Bayi Referans: 120.02.01.01.789") & 
